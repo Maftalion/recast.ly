@@ -20,16 +20,32 @@ class App extends React.Component {
       currVid: this.dummyVids[0]
     };
     this.clickVLE = this.clickVLE.bind(this);
+    this.onType = _.debounce(this.onType.bind(this), 500);
   }
 
   clickVLE(event) {
     this.setState({currVid: event});
   }
 
+  onType(event) {
+    // Call stuff on this with results of event
+    this.props.searchYouTube({ 
+      key: window.YOUTUBE_API_KEY,
+      max: '10',
+      query: event
+    }, 
+    function(results) {
+      this.setState({
+        allVids: results,
+        currVid: results[0]
+      });
+    }.bind(this));
+  }
+
   render() {
     return (
       <div>
-        <Nav />
+        <Nav onType={this.onType.bind(this)}/>
         <div className="col-md-7">
           <VideoPlayer video={this.state.currVid} state={this.state} />
         </div>
@@ -43,8 +59,8 @@ class App extends React.Component {
   componentDidMount() {
     this.props.searchYouTube({ 
       key: window.YOUTUBE_API_KEY,
-      max: '5',
-      query: 'react'
+      max: '10',
+      query: ''
     }, 
     function(results) {
       this.setState({
