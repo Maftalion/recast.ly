@@ -1,6 +1,6 @@
-var Search = (props) => (
+var Search = ({onType}) => (
   <div className="search-bar form-inline" >
-    <input className="form-control" type="text" onChange={function() { props.onType($('input').val()); }} />
+    <input className="form-control" type="text" onChange={(e) => { onType(e.target.value); } } />
     <button className="btn hidden-sm-down">
       <span className="glyphicon glyphicon-search"></span>
     </button>

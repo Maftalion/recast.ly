@@ -60,7 +60,7 @@ class App extends React.Component {
     this.props.searchYouTube({ 
       key: window.YOUTUBE_API_KEY,
       max: '10',
-      query: ''
+      query: 'cute kitten videos'
     }, 
     function(results) {
       this.setState({
