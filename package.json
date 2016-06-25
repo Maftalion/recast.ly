@@ -8,9 +8,9 @@
   "scripts": {
     "test": "live-server --open=./SpecRunner.html --port=8081",
     "postinstall": "curl -s https://raw.githubusercontent.com/hackreactor-labs/pomander/master/bin/install | bash",
-    "start": "npm install -g babel-cli",
+    "prestart": "npm install -g babel-cli",
     "start": "babel . --out-dir compiled --presets=es2015,react --ignore=node_modules,compiled --source-maps inline -w",
-    "start": "npm install -g live-server"
+    "pretest": "npm install -g live-server"
   },
   "dependencies": {
     "bootstrap": "^4.0.0-alpha.2",
