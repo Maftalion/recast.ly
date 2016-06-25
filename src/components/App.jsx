@@ -2,11 +2,14 @@ class App extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      currVid: this.props.data[0],
-      clickVLE: function(event) {
-        console.log(event);
-      }
+      currVid: window.exampleVideoData[0],
+      allVids: window.exampleVideoData
     };
+    this.clickVLE = this.clickVLE.bind(this);
+  }
+
+  clickVLE(event) {
+    this.setState({currVid: event});
   }
 
   render() {
@@ -17,7 +20,7 @@ class App extends React.Component {
           <VideoPlayer video={this.state.currVid} state={this.state} />
         </div>
         <div className="col-md-5">
-          <VideoList videos={this.props.data} state={this.state} />
+          <VideoList videos={this.state.allVids} state={this.state} click={this.clickVLE.bind(this)} />
         </div>
       </div>
     );
@@ -26,4 +29,4 @@ class App extends React.Component {
 
 // In the ES6 spec, files are "modules" and do not share a top-level scope
 // `var` declarations will only exist globally where explicitly defined
-window.App = App; //(window.exampleVideoData);
+window.App = App;
